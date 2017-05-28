@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yiibai.mybatis.dao.IUser">
+	<resultMap type="User" id="userResultMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="dept" column="dept" />
+		<result property="phone" column="phone" />
+		<result property="website" column="website" />
+	</resultMap>
+	<select id="GetUserByID" parameterType="int" resultType="User">
+		select *
+		from user where id = #{id}
+	</select>
+	<select id="getUserList" resultMap="userResultMap">
+		select * from user
+	</select>
+	<insert id="insertUser" parameterType="User">
+		insert into
+		user(id,name,dept,phone,website)
+		values(#{id},#{name},#{dept},#{phone},#{website})
+	</insert>
+	<update id="updateUser" parameterType="User">
+		update user
+		set
+		name=#{name},dept=#{dept},phone=#{phone},website=#{website}
+		where
+		id=#{id}
+	</update>
+	<delete id="deleteUser" parameterType="User">
+		delete from user where
+		id=#{id}
+	</delete>
+	<select id="getUser" parameterType="int" resultType="User">
+		select *
+		from user where id = #{id}
+	</select>
+</mapper>

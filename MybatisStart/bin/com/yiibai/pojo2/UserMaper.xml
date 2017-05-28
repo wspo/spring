@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiibai.pojo2.UserMaper">
+	<parameterMap type="User" id="parameterUserMap">
+		<parameter property="id" />
+		<parameter property="username" />
+		<parameter property="mobile" />
+	</parameterMap>
+
+	<insert id="insertUser" parameterMap="parameterUserMap">
+		INSERT INTO user(username,mobile)
+		VALUES(#{username},#{mobile});
+	</insert>
+
+	<resultMap type="User" id="resultUser">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<collection property="groups" column="id"
+			select="com.yiibai.pojo2.UserGroupMaper.getGroupsByUserId" />
+	</resultMap>
+
+	<select id="getUser" resultMap="resultUser" parameterType="int">
+		SELECT *
+		FROM user
+		WHERE id=#{id}
+	</select>
+</mapper>
